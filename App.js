@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, Button, StatusBar} from 'react-native';
+import { StyleSheet, View,} from 'react-native';
 import Header from './components/Header';
 import CurrentTab from './components/CurrentTab';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,12 +17,17 @@ import Paho from 'paho-mqtt';
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
+// client = new Paho.Client(
+//   "670e447454294335a3bf85d1ad54205d.s2.eu.hivemq.cloud",
+//   Number(8884),
+//   `mqtt-async-test-${parseInt(Math.random() * 100)}`
+// );
+
 client = new Paho.Client(
-  "670e447454294335a3bf85d1ad54205d.s2.eu.hivemq.cloud",
+  "34773dcfbaf24a4bba66e5a333c2df9a.s1.eu.hivemq.cloud",
   Number(8884),
   `mqtt-async-test-${parseInt(Math.random() * 100)}`
 );
-
 
 const App = () => {
 
@@ -47,8 +52,10 @@ const App = () => {
     onFailure: () => {
       console.log("Failed to connect!"); 
     },
-    userName: 'ads001',
-    password: '12345678Ads',
+    // userName: 'ads001',
+    // password: '12345678Ads',
+    userName: 'ads@rpi',
+    password: 'Ads12345678',
     useSSL: true
   });
   }, [])
@@ -84,7 +91,7 @@ const App = () => {
               </Tab.Navigator>
             )}
           </Drawer.Screen>
-          <Drawer.Screen name="System" component={CurrentTab}/>
+          {/* <Drawer.Screen name="System" component={CurrentTab}/> */}
           <Drawer.Screen name="CST" component={AboutCST} />
           <Drawer.Screen name="AMTC" component={AboutAMTC}/>
           <Drawer.Screen name="Contact Us" component={ContactUs}/>
