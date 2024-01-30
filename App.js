@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image} from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Button, StatusBar} from 'react-native';
 import Header from './components/Header';
 import CurrentTab from './components/CurrentTab';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,19 +10,58 @@ import AboutCST from './screens/AboutCST';
 import AboutAMTC from './screens/AboutAMTC';
 import ContactUs from './screens/ContactUs';
 import Help from './screens/Help';
+import { useState, useEffect } from 'react';
+
+import Paho from 'paho-mqtt';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
+client = new Paho.Client(
+  "670e447454294335a3bf85d1ad54205d.s2.eu.hivemq.cloud",
+  Number(8884),
+  `mqtt-async-test-${parseInt(Math.random() * 100)}`
+);
+
 
 const App = () => {
+
+  const [value, setValue] = useState([]);
+  const [systemname, setSystemName] = useState('');
+  const [timestamp, setTimeStamp] = useState('');
+  const [imageSource, setImageSource] = useState('');
+  const [animalname, setAnimalName] = useState('');
+
+  function onMessage(message) {
+    if (message.destinationName === "animal")
+        setValue(message.payloadString.toString().split("####"));
+  }
+
+  useEffect(() => {
+    client.connect( {
+      onSuccess: () => { 
+      console.log("Connected!");
+      client.subscribe("animal");
+      client.onMessageArrived = onMessage;
+    },
+    onFailure: () => {
+      console.log("Failed to connect!"); 
+    },
+    userName: 'ads001',
+    password: '12345678Ads',
+    useSSL: true
+  });
+  }, [])
+
+ 
+
+
   return (
     <View style={styles.container}>
       <NavigationContainer>
         <Drawer.Navigator
           screenOptions={{
             header: () => <Header />,
-            
           }}
         >
           <Drawer.Screen name="Home">
@@ -30,14 +69,16 @@ const App = () => {
               <Tab.Navigator>
                 <Tab.Screen 
                   name="Current Tab" 
-                  component={CurrentTab} 
-                  options={{headerTitle: '', headerStatusBarHeight: -50, }}
-
-                />
+                  // component={CurrentTab} 
+                  options={{headerTitle: '', headerStatusBarHeight: -50,}}
+                >
+                  {(props) => <CurrentTab {...props} data={value}/>}
+                </Tab.Screen>
                 <Tab.Screen 
                   name="Data Analysis" 
                   component={DataAnalysis}
                   options={{headerTitle: '', headerStatusBarHeight: -50, }}
+                  initialParams={{data: 'hello'}}
 
                 />
               </Tab.Navigator>
@@ -58,8 +99,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
+  // image: {
+  //   height: 100,
+  //   width: 100
+  // },
 });
 
 export default App;
