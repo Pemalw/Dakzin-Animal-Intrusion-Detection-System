@@ -34,7 +34,7 @@ const ContactUs = () => {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.contactInfo}>Email: contact@example.com</Text>
+      <Text style={styles.contactInfo}>Email: http://www.amc.gov.bt</Text>
       <Text style={styles.contactInfo}>Phone: +123 456 7890</Text>
     </View>
     </View>

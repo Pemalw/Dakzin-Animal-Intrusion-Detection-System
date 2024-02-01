@@ -91,7 +91,7 @@ const App = () => {
               </Tab.Navigator>
             )}
           </Drawer.Screen>
-          {/* <Drawer.Screen name="System" component={CurrentTab}/> */}
+          <Drawer.Screen name="System Information" component={Help}/>
           <Drawer.Screen name="CST" component={AboutCST} />
           <Drawer.Screen name="AMTC" component={AboutAMTC}/>
           <Drawer.Screen name="Contact Us" component={ContactUs}/>
