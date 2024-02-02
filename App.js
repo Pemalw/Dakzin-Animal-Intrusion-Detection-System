@@ -11,6 +11,8 @@ import AboutAMTC from './screens/AboutAMTC';
 import ContactUs from './screens/ContactUs';
 import Help from './screens/Help';
 import { useState, useEffect } from 'react';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 import Paho from 'paho-mqtt';
 
@@ -71,20 +73,30 @@ const App = () => {
             header: () => <Header />,
           }}
         >
-          <Drawer.Screen name="Home">
+          <Drawer.Screen name="Homepage">
             {() => (
               <Tab.Navigator>
                 <Tab.Screen 
-                  name="Current Tab" 
+                  name="Home" 
                   // component={CurrentTab} 
-                  options={{headerTitle: '', headerStatusBarHeight: -50,}}
+                  options={{headerTitle: '',
+                            headerStatusBarHeight: -50,
+                            tabBarIcon: ({ color, size }) => (
+                              <MaterialCommunityIcons name="home" color={color} size={size} />
+                            ),
+                          }}
                 >
                   {(props) => <CurrentTab {...props} data={value}/>}
                 </Tab.Screen>
                 <Tab.Screen 
                   name="Data Analysis" 
                   component={DataAnalysis}
-                  options={{headerTitle: '', headerStatusBarHeight: -50, }}
+                  options={{headerTitle: '',
+                            headerStatusBarHeight: -50,
+                            tabBarIcon: ({ color, size }) => (
+                              <Entypo name="bar-graph" color={color} size={size} />
+                            ),
+                          }}
                   initialParams={{data: 'hello'}}
 
                 />
