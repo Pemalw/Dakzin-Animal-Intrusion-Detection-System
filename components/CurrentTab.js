@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, View, Text, FlatList} from 'react-native';
 
 const CurrentTab = ({data}) => {
+  // const [currentTime, setCurrentTime] = useState(getDate());
+
+  // function getDate() {
+  //   const now = new Date();
+  //   const month = now.getMonth() + 1;
+  //   const year = now.getFullYear();
+  //   const date = now.getDate();
+  //   const hours = now.getHours();
+  //   const min = now.getMinutes();
+  //   const sec = now.getSeconds();
+  //   return `${year}-${month}-${date} ${hours}:${min}:${sec}`;
+  // }
+
 
   function isNow() {
     var nos=""
@@ -57,6 +70,7 @@ const CurrentTab = ({data}) => {
       <View style={styles.container}>
         <Text style={styles.text}>{data.length != 0? data[1]: "Camera name"}</Text>
         <Text style={styles.text}>{data.length != 0? data[3] : "TimeStamp"}</Text>
+        {/* <Text style={styles.text}>CT: {currentTime}</Text> */}
         <Image style={styles.image} source={data.length != 0 ? { uri: `data:image/jpeg;base64,${data[0]}` } : require('../assets/images/default.jpg')} />
         <Text style={styles.animalText}>{data.length != 0? data[2] : "animal name"}</Text>
       </View>
