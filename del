@@ -1,69 +1,137 @@
-import React from 'react';
-import { StyleSheet, Image, View, Text, FlatList} from 'react-native';
+// import React from 'react';
+// import { StyleSheet, View,} from 'react-native';
+// import Header from './components/Header';
+// import CurrentTab from './components/CurrentTab';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createDrawerNavigator} from '@react-navigation/drawer';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import DataAnalysis from './components/DataAnalysis';
+// import Settings from './screens/Settings';
+// import ContactUs from './screens/ContactUs';
+// import Help from './screens/Help';
+// import LogIn from './screens/LoginPage';
+// import { useState, useEffect } from 'react';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import Entypo from 'react-native-vector-icons/Entypo';
 
-const DATA = [
-  {
-    CameraName: 'Camera 1',
-    DateTime: '29/10/24',
-    image: require('../assets/images/boar.jpeg'),
-    comment: 'Wild Pig Detected!',
-  },
-  {
-    CameraName: 'Camera 2',
-    DateTime: '25/10/24',
-    image: require('../assets/images/boar.jpeg'),
-    comment: 'Elephant Detected!',
-  },
-  {
-    CameraName: 'Camera 3',
-    DateTime: '30/10/24',
-    image: require('../assets/images/boar.jpeg'),
-    comment: 'Monkey Detected!',
-  },
-];
+// import Paho from 'paho-mqtt';
+// import AddSystem from './screens/AddSystem';
+// import NoData from './screens/NoData';
+// import SystemInformation from './screens/SystemInformation';
+// import AboutUs from './screens/AboutUs';
 
-const renderItem = ({ item }) => (
-    <View style={styles.container}>
-        <Text style={styles.text}>{item.CameraName}</Text>
-        <Text style={styles.text}>{item.DateTime}</Text>
-        <Image style={styles.image} source={item.image} />
-        <Text style={styles.text}>{item.comment}</Text>
-    </View>
-);
+// const Drawer = createDrawerNavigator();
+// const Tab = createBottomTabNavigator();
 
-const CurrentTab = ({route}) => {
-  return (
-    <View style={styles.main}>
-        <FlatList
-            data={DATA}
-            renderItem={renderItem}
-        />
-    </View>
-  );
-};
+// // client = new Paho.Client(
+// //   "670e447454294335a3bf85d1ad54205d.s2.eu.hivemq.cloud",
+// //   Number(8884),
+// //   `mqtt-async-test-${parseInt(Math.random() * 100)}`
+// // );
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    margin: 12,
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    borderRadius: 15,
-  },
-  text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    margin: 8,
-  },
-  image: {
-    width: 200,
-    height: 200,
-  },
-});
+// client = new Paho.Client(
+//   "34773dcfbaf24a4bba66e5a333c2df9a.s1.eu.hivemq.cloud",
+//   Number(8884),
+//   `mqtt-async-test-${parseInt(Math.random() * 100)}`
+// );
 
-export default CurrentTab;
+// const HomePage = () => {
+
+//   const [value, setValue] = useState([]);
+//   const [systemname, setSystemName] = useState('');
+//   const [timestamp, setTimeStamp] = useState('');
+//   const [imageSource, setImageSource] = useState('');
+//   const [animalname, setAnimalName] = useState('');
+
+//   function onMessage(message) {
+//     if (message.destinationName === "animal")
+//         setValue(message.payloadString.toString().split("####"));
+//   }
+
+//   useEffect(() => {
+//     client.connect( {
+//       onSuccess: () => { 
+//       console.log("Connected!");
+//       client.subscribe("animal");
+//       client.onMessageArrived = onMessage;
+//     },
+//     onFailure: () => {
+//       console.log("Failed to connect!"); 
+//     },
+//     // userName: 'ads001',
+//     // password: '12345678Ads',
+//     userName: 'ads@rpi',
+//     password: 'Ads12345678',
+//     useSSL: true
+//   });
+//   }, [])
+
+ 
+
+
+//   return (
+//     <View style={styles.container}>
+//       <NavigationContainer>
+//         <Drawer.Navigator
+//           screenOptions={{
+//             header: () => <Header />,
+//           }}
+//         >
+//           <Drawer.Screen name="Login" component={LogIn}/>
+//           <Drawer.Screen name="Homepage">
+//             {() => (
+//               <Tab.Navigator>
+//                 <Tab.Screen 
+//                   name="Home" 
+//                   // component={CurrentTab} 
+//                   options={{headerTitle: '',
+//                             headerStatusBarHeight: -50,
+//                             tabBarIcon: ({ color, size }) => (
+//                               <MaterialCommunityIcons name="home" color={color} size={size} />
+//                             ),
+//                           }}
+//                 >
+//                   {(props) => <CurrentTab {...props} data={value}/>}
+//                 </Tab.Screen>
+//                 <Tab.Screen 
+//                   name="Data Analysis" 
+//                   component={DataAnalysis}
+//                   options={{headerTitle: '',
+//                             headerStatusBarHeight: -50,
+//                             tabBarIcon: ({ color, size }) => (
+//                               <Entypo name="bar-graph" color={color} size={size} />
+//                             ),
+//                           }}
+//                   initialParams={{data: 'hello'}}
+
+//                 />
+//               </Tab.Navigator>
+//             )}
+//           </Drawer.Screen>
+//           <Drawer.Screen name="System Information" component={SystemInformation}/>
+//           <Drawer.Screen name="About Us" component={AboutUs} />
+//           <Drawer.Screen name="Contact Us" component={ContactUs}/>
+//           <Drawer.Screen name="Help" component={Help}/>
+//           <Drawer.Screen name="Settings" component={Settings}/>
+//           <Drawer.Screen name="Add System" component={AddSystem}/>
+//           <Drawer.Screen name="No Data" component={NoData}/>
+//         </Drawer.Navigator>
+//       </NavigationContainer>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     paddingTop: 20,
+//     justifyContent: 'space-between',
+//     backgroundColor: '#fff',
+//   },
+//   // image: {
+//   //   height: 100,
+//   //   width: 100
+//   // },
+// });
+
+// export default HomePage;
