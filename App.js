@@ -94,7 +94,7 @@ const App = () => {
                   options={{headerTitle: '',
                             headerStatusBarHeight: -50,
                             tabBarIcon: ({ color, size }) => (
-                              <Entypo name="bar-graph" color={color} size={size} />
+                              <Entypo name="bar-graph" color={color} size={size}/>
                             ),
                           }}
                   initialParams={{data: 'hello'}}
