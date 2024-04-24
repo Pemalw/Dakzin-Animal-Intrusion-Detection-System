@@ -22,6 +22,7 @@ client = new Paho.Client(
 //   `mqtt-async-test-${parseInt(Math.random() * 100)}`
 // );
 
+const animalarr=["Bear","Boar","Cattle","Deer","Elephant","Horse","Monkey"]
 const sendNotification = async (animalName) => {
   await Notifications.scheduleNotificationAsync({
     content: {
@@ -29,7 +30,7 @@ const sendNotification = async (animalName) => {
       body: `Animal Detected: ${animalName} has been detected!`,
       sound: "warning.wav",
       vibrate: true,
-      icon: "logo.png",
+      icon: "logo.png"
     },
     trigger: null, // send immediately
   });
@@ -41,37 +42,27 @@ export default function Home() {
 
   async function store(){
     if(value){
-      await saveItems('animals',Array.toString(value));
+      // await saveItems('animals',Array.toString(value));
+      await saveItems('animals', value);
     }
   }
 
   async function onMessage(message) {
-    const animalName = message.payloadString.toString().split("####")[2];
-    await sendNotification(animalName);
+    const animalarr=["Bear","Boar","Cattle","Deer","Elephant","Horse","Monkey"]
+    const animalName = message.payloadString.toString().split("####")[0];
+    await sendNotification(animalarr[animalName]);
+
+    // if (message.destinationName === "animal") {
+    //   const temp=value;
+    //   temp.unshift(message.payloadString.toString().split("####"));
+    //   setValue(temp);
+    //   setReceivedData(true);
+    // }
 
     if (message.destinationName === "animal") {
-      const temp=value;
-      /*
-      if(value.length<5){
-        //push
-        temp.unshift(message.payloadString.toString().split("####"));
-        
-        console.log(value.length)
-        //console.log(temp);
-      }else{
-        console.log("Hello");
-        //shift
-        temp.unshift(message.payloadString.toString().split("####"));
-        console.log("added"+temp.length);
-        temp.pop();
-        console.log("deleted"+temp.length);
-        //push
-
-      
-      }*/
-      temp.unshift(message.payloadString.toString().split("####"));
-      setValue(temp);
-      setReceivedData(true);
+      const newItem = message.payloadString.toString().split("####");
+      setValue(prevValue => [newItem, ...prevValue]); // Update the state with new item at the beginning
+      setReceivedData(true); // Trigger re-render of CurrentTab
     }
   }
   const getSystemCredentials = async () => {
@@ -128,7 +119,7 @@ export default function Home() {
       }
     });
     
-  }, [/*onMessage*/]);
+  }, []);
 
   if (!receivedData) {
     return <NoData />;

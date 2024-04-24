@@ -26,6 +26,7 @@ const AddSystem = () => {
   }; 
 
   const handleAddSystem = async() => {
+    // if (systemID != "ads001" || password != "12345678Ads") {
     if (systemID != "ads@rpi" || password != "Ads12345678") {
       setDataIsInvalid("System ID or password is invalid");
       setSystemID("");

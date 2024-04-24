@@ -5,7 +5,7 @@
     "slug": "AIDSapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -16,13 +16,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lwpema.AIDSapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lwpema.AIDSapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,7 +34,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/logo.png",
+          "icon": "./assets/images/logo.png",
           "color": "#ffffff",
           "sounds": [
             "./assets/sounds/warning.wav"
@@ -40,6 +42,14 @@
         }
       ],
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "f887a1e4-f6a0-47e6-a62a-6d258c01989b"
+      }
+    }
   }
 }
